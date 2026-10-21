@@ -10,13 +10,17 @@ public class HomeTheaterFacade {
     }
 
     public void watchMovie(String movie) {
-        System.out.println("Get ready to watch a movie...");
-        projector.on();
-        projector.wideScreenMode();
-        amp.on();
-        amp.setVolume(5);
-        dvd.on();
-        dvd.play(movie);
+        try {
+            System.out.println("Get ready to watch a movie...");
+            projector.on();
+            projector.wideScreenMode();
+            amp.on();
+            amp.setVolume(5);
+            dvd.on();
+            dvd.play(movie);
+        } catch (DeviceException e) {
+            throw new TheaterStartupException("Theater failed to start", e);
+        }
     }
 
     public void endMovie() {
